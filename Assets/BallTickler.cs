@@ -33,7 +33,7 @@ public class BallTickler : MonoBehaviour {
 	private void ResetRepeater(){
 		
 		repeaterClear = true;
-		//poop
+		//poop a lot
 
 	}
 
