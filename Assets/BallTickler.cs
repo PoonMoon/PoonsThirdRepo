@@ -7,14 +7,14 @@ public class BallTickler : MonoBehaviour {
 
 	public float keyRepeatTime = 1f;
 
-	private bool repeaterClear = true;
+	public bool repeaterClear = true;
 
 
 	
 	// Update is called once per frame
 	void Update () {
 
-		bool fire = CrossPlatformInputManager.GetButton("fire");
+		bool fire = CrossPlatformInputManager.GetButton("Fire");
 
 
 		if (fire && repeaterClear ==true){
@@ -23,7 +23,7 @@ public class BallTickler : MonoBehaviour {
 			Invoke ("ResetRepeater",keyRepeatTime);
 		}
 
-		if (CrossPlatformInputManager.GetButtonUp("fire"))
+		if (CrossPlatformInputManager.GetButtonUp("Fire"))
 		{
 			repeaterClear =true;
 		}
