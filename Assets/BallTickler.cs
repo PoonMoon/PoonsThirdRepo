@@ -14,6 +14,9 @@ public class BallTickler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+		print (CrossPlatformInputManager.GetAxis("Horizontal"));
+
 		bool fire = CrossPlatformInputManager.GetButton("Fire");
 
 
