@@ -7,20 +7,19 @@ namespace UnityStandardAssets.Vehicles.Ball
     public class BallUserControl : MonoBehaviour
     {
         private Ball ball; // Reference to the ball controller.
-
+		private Rigidbody myRigidBall;
         private Vector3 move;
         // the world-relative desired move direction, calculated from the camForward and user input.
 
         private Transform cam; // A reference to the main camera in the scenes transform
         private Vector3 camForward; // The current forward direction of the camera
-        private bool jump; // whether the jump button is currently pressed
-
+		public bool jump; // whether the jump button is currently pressed
 
         private void Awake()
         {
             // Set up the reference.
             ball = GetComponent<Ball>();
-
+			myRigidBall = GetComponent<Rigidbody>();
 
             // get the transform of the main camera
             if (Camera.main != null)
@@ -36,13 +35,34 @@ namespace UnityStandardAssets.Vehicles.Ball
         }
 
 
+		private void FixedUpdate(){
+			ball.Move(move, jump);
+			jump = false;
+		}
+
+
         private void Update()
         {
-            // Get the axis and jump input.
+            // Get the axis from Joystick Mouse 
+			float h = CrossPlatformInputManager.GetAxis("Horizontal");
+			float v = CrossPlatformInputManager.GetAxis("Vertical");
 
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
-            jump = CrossPlatformInputManager.GetButton("Jump");
+
+
+			if (CrossPlatformInputManager.GetButtonDown("Jump")  ){
+				//myRigidBall.velocity = Vector3.up * jumpPower;
+				//myRigidBall.AddForce(Vector3.up*jumpPower);
+
+				Debug.Log ("JUMP");
+				jump = true;
+
+			} 
+
+
+
+
+
+
 
             // calculate move direction
             if (cam != null)
@@ -56,14 +76,11 @@ namespace UnityStandardAssets.Vehicles.Ball
                 // we use world-relative directions in the case of no main camera
                 move = (v*Vector3.forward + h*Vector3.right).normalized;
             }
+
+
         }
 
 
-        private void FixedUpdate()
-        {
-            // Call the Move function of the ball controller
-            ball.Move(move, jump);
-            jump = false;
-        }
+ 
     }
 }
