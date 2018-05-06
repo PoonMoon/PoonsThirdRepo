@@ -27,15 +27,22 @@ namespace UnityStandardAssets.Vehicles.Ball
 		public bool ballJump =false;
 		public float rayDepth = 0.1f;
 
+
+
+		//private MyReplay replayer;
+
+
 		private void Start()
 
         {
             myBall = GetComponent<Rigidbody>();
+
             // Set the maximum angular velocity.
 			myBall.maxAngularVelocity = topSpeed;
 			//myBall. = topSpeed;
 			xAnaloguePosition = CrossPlatformInputManager.GetAxis ("Horizontal");
 			myXdirection = xDirection.NONE;
+
 
         }//end Start
 
@@ -60,7 +67,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
 
 
-
+			myBall.maxAngularVelocity = topSpeed;
 
 			//are we on the ground?
 			if (Grounded ()) {
@@ -102,15 +109,20 @@ namespace UnityStandardAssets.Vehicles.Ball
 
 			if (ballJump) {
 				//jump
-				myBall.AddForce(Vector3.up*jumpPower);
+				myBall.AddForce(Vector3.up*jumpPower,ForceMode.Impulse);
 	
-				if (myBall.velocity.y < 0) { //if we have reached the apex or ar falling...
-					myBall.velocity += Vector3.up * Physics.gravity.y * (fallMulitplier - 1) * (Time.deltaTime); // the minus one means then that the multiplier is a 2x / 2.5 x as we already have 1 gravirty
-				} 
+//				if (myBall.velocity.y < 0) { //if we have reached the apex or ar falling...
+//					myBall.velocity += Vector3.up * Physics.gravity.y * (fallMulitplier - 1) * (Time.fixedDeltaTime); // the minus one means then that the multiplier is a 2x / 2.5 x as we already have 1 gravirty
+//				} 
+//
+////				else if (myBall.velocity.y > 0 && !CrossPlatformInputManager.GetButton ("Jump")) {
+////					myBall.velocity += Vector3.up * Physics.gravity.y * (shortJumpingMultiplier - 1) * (Time.deltaTime);
+////				}
 
-//				else if (myBall.velocity.y > 0 && !CrossPlatformInputManager.GetButton ("Jump")) {
-//					myBall.velocity += Vector3.up * Physics.gravity.y * (shortJumpingMultiplier - 1) * (Time.deltaTime);
-//				}
+				if (myBall.velocity.y < 0) {
+				}
+
+
 			}//end if jump
 
 

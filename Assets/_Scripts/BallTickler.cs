@@ -17,16 +17,16 @@ public class BallTickler : MonoBehaviour {
 
 		print (CrossPlatformInputManager.GetAxis("Horizontal"));
 
-		bool fire = CrossPlatformInputManager.GetButton("Fire");
+		bool jump = CrossPlatformInputManager.GetButton("Jump");
 
 
-		if (fire && repeaterClear ==true){
-			Debug.Log ("Cross plat Input manager KEYDOWN " + fire);
+		if (jump && repeaterClear ==true){
+			Debug.Log ("Cross plat Input manager KEYDOWN " + jump);
 			repeaterClear = false;
 			Invoke ("ResetRepeater",keyRepeatTime);
 		}
 
-		if (CrossPlatformInputManager.GetButtonUp("Fire"))
+		if (CrossPlatformInputManager.GetButtonUp("Jump"))
 		{
 			repeaterClear =true;
 		}
