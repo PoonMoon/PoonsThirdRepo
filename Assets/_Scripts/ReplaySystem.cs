@@ -10,14 +10,14 @@ public class ReplaySystem : MonoBehaviour {
 	private GameManager rsGameManager;
 	private int bufferOffset = 0; //used to offset the replay when we have not had a complete cycle
 	private bool offsetSet = false;
-	private Transform rsTrans;
+
 	public bool rsRecording = true;
 
 	// Use this for initialization
 	void Start () {
 		rsRigidBody = this.GetComponent<Rigidbody>();
 		rsGameManager = FindObjectOfType<GameManager> ();
-		rsTrans = GetComponent<Transform> ();
+
 		
 	}//end Start
 	
@@ -70,7 +70,7 @@ public class ReplaySystem : MonoBehaviour {
 		bufferOffset = 0;
 
 		int frameNumber = Time.frameCount % bufferSize;
-		print ("Recording FrameBuffer " + frameNumber);
+		//print ("Recording FrameBuffer " + frameNumber);
 		keyFrames [frameNumber] = new MyKeyframe (Time.time, transform.position, transform.rotation);
 	}//end record method
 }

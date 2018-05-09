@@ -7,19 +7,20 @@ namespace UnityStandardAssets.Vehicles.Ball
     public class BallUserControl : MonoBehaviour
     {
         private Ball ball; // Reference to the ball controller.
-		private Rigidbody myRigidBall;
+
         private Vector3 move;
         // the world-relative desired move direction, calculated from the camForward and user input.
 
         private Transform cam; // A reference to the main camera in the scenes transform
         private Vector3 camForward; // The current forward direction of the camera
+
 		public bool jump; // whether the jump button is currently pressed
 
         private void Awake()
         {
             // Set up the reference.
             ball = GetComponent<Ball>();
-			myRigidBall = GetComponent<Rigidbody>();
+
 
             // get the transform of the main camera
             if (Camera.main != null)
@@ -47,14 +48,20 @@ namespace UnityStandardAssets.Vehicles.Ball
 			float h = CrossPlatformInputManager.GetAxis("Horizontal");
 			float v = CrossPlatformInputManager.GetAxis("Vertical");
 
+			//float rt = CrossPlatformInputManager.GetAxis("Triggers"); //mapped to Steam Controller triggers - 3rd axis.
+			//Debug.Log ("Right trigger is " + rt);
+
+			float camX = CrossPlatformInputManager.GetAxis("CamX"); //mapped to Steam Controller triggers - 3rd axis.
+			float camY = CrossPlatformInputManager.GetAxis("CamY"); //mapped to Steam Controller triggers - 4th axis.
+			Debug.Log ("Camx axis is " + camX + ", " + camY);
 
 
 			if (CrossPlatformInputManager.GetButtonDown("Jump")  ){
-				//myRigidBall.velocity = Vector3.up * jumpPower;
-				//myRigidBall.AddForce(Vector3.up*jumpPower);
 
-				Debug.Log ("JUMP");
+
 				jump = true;
+
+
 
 			} 
 
