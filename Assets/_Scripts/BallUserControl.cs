@@ -51,43 +51,32 @@ namespace UnityStandardAssets.Vehicles.Ball
 			//float rt = CrossPlatformInputManager.GetAxis("Triggers"); //mapped to Steam Controller triggers - 3rd axis.
 			//Debug.Log ("Right trigger is " + rt);
 
-			float camX = CrossPlatformInputManager.GetAxis("CamX"); //mapped to Steam Controller triggers - 3rd axis.
-			float camY = CrossPlatformInputManager.GetAxis("CamY"); //mapped to Steam Controller triggers - 4th axis.
-			Debug.Log ("Camx axis is " + camX + ", " + camY);
+			float camHoriz = CrossPlatformInputManager.GetAxis("CamHoriz"); //mapped to Steam Controller triggers - 4th axis.
+			float camVert = CrossPlatformInputManager.GetAxis("CamVert"); //mapped to Steam Controller triggers - 5th axis.
+			//Debug.Log ("Camx axis is " + camHoriz + ", " + camVert);
 
 
-			if (CrossPlatformInputManager.GetButtonDown("Jump")  ){
-
-
-				jump = true;
-
-
-
-			} 
-
-
-
-
-
-
+			if (CrossPlatformInputManager.GetButtonDown("Jump")  )
+				{
+					jump = true;
+				} 
 
             // calculate move direction
             if (cam != null)
-            {
-                // calculate camera relative direction to move:
-                camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
-                move = (v*camForward + h*cam.right).normalized;
-            }
+	            {
+	                // calculate camera relative direction to move:
+	                camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
+	                move = (v*camForward + h*cam.right).normalized;
+	            }
             else
-            {
-                // we use world-relative directions in the case of no main camera
-                move = (v*Vector3.forward + h*Vector3.right).normalized;
-            }
+	            {
+	                // we use world-relative directions in the case of no main camera
+	                move = (v*Vector3.forward + h*Vector3.right).normalized;
+	            }
 
 
-        }
+        }//end update
 
+	}//end BallUser
 
- 
-    }
-}
+}//big end
